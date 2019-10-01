@@ -1,0 +1,28 @@
+version: '2'
+services:
+    db:
+      image: postgres
+      restart: always
+      environment:
+        PG_ROOT_PASSWORD: password
+        PG_DATABASE: rnc-api
+        PG_USER: postgres
+        PG_PASSWORD: password
+      ports:
+        - "5000:5432"
+    app:
+        build: .
+        command: bundle exec rails s -p 3000 -b '0.0.0.0'
+        volumes:
+            - .:/rnc-api:rw
+        ports:
+            - "3002:3000"
+        depends_on:
+            - db
+        links:
+            - db
+        environment:
+          DB_USER: postgres
+          DB_NAME: rnc-api
+          DB_PASSWORD: password
+          DB_HOST: db
