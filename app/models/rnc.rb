@@ -1,0 +1,2 @@
+class Rnc < ApplicationRecord
+end
