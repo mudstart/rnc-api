@@ -7,7 +7,9 @@ WORKDIR /rnc-api
 
 ADD Gemfile /rnc-api/Gemfile
 ADD Gemfile.lock /rnc-api/Gemfile.lock
-
-RUN bundle install
-
 ADD . /rnc-api
+RUN bundle install
+RUN curl -sL https://deb.nodesource.com/setup_8.x |   bash -
+RUN  apt-get install -y nodejs
+CMD tail -f /dev/null
+
